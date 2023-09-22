@@ -1,28 +1,46 @@
-const btn = document.getElementById('ruleta');
-const ruletaData = document.getElementById('ruletaData');
+const URL_BASE = "http://api.openweathermap.org/data/2.5/weather" ;
 
-const marvel = () => {
-    fetch('https://gateway.marvel.com/v1/public/series?ts=3000&apikey=ce8f79a991b17b496e63476f6f1c5e1d&hash=5b55814be16762144d34aa112381b776')
-    .then(response => response.json())
-    .then(data => {
-        ruletaData.innerHTML = JSON.stringify(data);
+function getData(ciudad){
+    fetch(`${URL_BASE}?q=${ciudad},uy&appid=e2fe33f4578c6dd8477a4749d20a7c29&lang=es&units=metric`)
+    .then(response => { 
+        if(response.ok){
+            return response.json();
+        }
+        else {
+            showError();
+            throw new Error("error en nombre ciudad");
+        }
     })
-    .catch(e => console.error(new Error(e)));
+    .then(data => {
+        showData(data);
+    })
+    .catch(error => console.log(error));
+
+};
+
+function showError(){
+    let mensaje = document.getElementById('mensajeError');
+    mensaje.innerText = "La ciudad que estás buscando no es correcta o no se encuentra en Uruguay.";
 }
 
-btn.addEventListener('click', marvel);
+function showData(a){
+    let mensaje = document.getElementById('mensajeError');
+    mensaje.innerText = "";
+    let info = document.getElementById('infoCiudad');
+    info.innerHTML= `
+    <h3>Estado del tiempo en ${a["name"]}</h3>
+    <p>La temperatura es de ${a["main"]["temp"]}°C</p>
+    <p>La sensación térmica es de ${a["main"]["feels_like"]}°C</p>
+    <p>La humedad es de ${a["main"]["humidity"]}%</p>
+    <p>Hay vientos de hasta ${a["wind"]["speed"]} m/s </p>
+    <p>La descripción del tiempo es: ${a["weather"][0]["description"]}`;
+};
 
-
-//     
-//     .then(data => {
-//         json.data.results.map(item => {
-//             let url = item.thumbnail.path+item.thumbnail.extension
-//             appDiv.innerHTML += `<div class="item">
-//             <img src=${url.replace('http' , 'https')} />
-//             <span>${item.name}</span>
-//             </div>`
-//         })
-//     });
-
-
-// http://gateway.marvel.com/v1/public/series?ts=3000&apikey=ce8f79a991b17b496e63476f6f1c5e1d&hash=5b55814be16762144d34aa112381b776
+document.addEventListener('DOMContentLoaded',()=>{
+    let form = document.getElementById('form');
+    let ciudad = document.getElementById('ciudad');
+    form.addEventListener('submit',(e)=>{
+        e.preventDefault();
+        getData(ciudad.value);
+    });
+});
