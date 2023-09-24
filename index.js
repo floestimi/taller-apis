@@ -28,12 +28,14 @@ function showData(a){
     mensaje.innerText = "";
     let info = document.getElementById('infoCiudad');
     info.innerHTML= `
-    <h3>Estado del tiempo en ${a["name"]}</h3>
-    <p>La temperatura es de ${a["main"]["temp"]}°C</p>
-    <p>La sensación térmica es de ${a["main"]["feels_like"]}°C</p>
-    <p>La humedad es de ${a["main"]["humidity"]}%</p>
-    <p>Hay vientos de hasta ${a["wind"]["speed"]} m/s </p>
-    <p>La descripción del tiempo es: ${a["weather"][0]["description"]}`;
+    <div class="text-center">
+        <h3>Estado del tiempo en ${a["name"]}</h3>
+        <p>La temperatura es de ${a["main"]["temp"]}°C</p>
+        <p>La sensación térmica es de ${a["main"]["feels_like"]}°C</p>
+        <p>La humedad es de ${a["main"]["humidity"]}%</p>
+        <p>Hay vientos de hasta ${a["wind"]["speed"]} m/s </p>
+        <p>La descripción del tiempo es: ${a["weather"][0]["description"]}
+    </div>`;
 };
 
 document.addEventListener('DOMContentLoaded',()=>{
