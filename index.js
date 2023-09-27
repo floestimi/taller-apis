@@ -21,6 +21,8 @@ function getData(ciudad){
 function showError(){
     let mensaje = document.getElementById('mensajeError');
     mensaje.innerText = "La ciudad que estás buscando no es correcta o no se encuentra en Uruguay.";
+    let info = document.getElementById('infoCiudad');
+    info.innerHTML= "" ;
 }
 
 function showData(a){
