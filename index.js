@@ -1,4 +1,4 @@
-const URL_BASE = "http://api.openweathermap.org/data/2.5/weather" ;
+const URL_BASE = "https://api.openweathermap.org/data/2.5/weather" ;
 
 function getData(ciudad){
     fetch(`${URL_BASE}?q=${ciudad},uy&appid=e2fe33f4578c6dd8477a4749d20a7c29&lang=es&units=metric`)
