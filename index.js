@@ -31,7 +31,7 @@ function showData(a){
     let info = document.getElementById('infoCiudad');
     info.innerHTML= `
     <div class="text-center">
-        <img src="/giphy.gif" height="200px" width="200px">
+        <img src="./giphy.gif" height="200px" width="200px">
         <h3>Estado del tiempo en ${a["name"]}</h3>
         <hr>
         <p>La temperatura es de ${a["main"]["temp"]}°C</p>
